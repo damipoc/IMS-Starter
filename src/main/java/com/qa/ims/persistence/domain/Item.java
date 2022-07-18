@@ -4,16 +4,16 @@ public class Item {
 
     private Long id;
     private String name;
-    private Float value;
+    private Double value;
 
 
-    public Item(String name, Float value) {
+    public Item(String name, Double value) {
         this.name = name;
         this.value = value;
     }
 
 
-    public Item(Long id, String name, Float value) {
+    public Item(Long id, String name, Double value) {
         this.id = id;
         this.name = name;
         this.value = value;
@@ -40,12 +40,12 @@ public class Item {
     }
 
 
-    public Float getValue() {
+    public Double getValue() {
         return value;
     }
 
 
-    public void setValue(Float value) {
+    public void setValue(Double value) {
         this.value = value;
     }
 
