@@ -26,3 +26,12 @@ CREATE TABLE IF NOT EXISTS orders (
     FOREIGN KEY (fk_customer_id) REFERENCES customers(id),
     FOREIGN KEY (fk_item_id) REFERENCES items(id)
 );
+
+CREATE TABLE IF NOT EXISTS orderItems (
+    id INT NOT NULL AUTO_INCREMENT,
+    fk_order_id INT NOT NULL, 
+    fk_item_id INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (fk_order_id) REFERENCES orders(id),
+    FOREIGN KEY (fk_item_id) REFERENCES items(id)
+);

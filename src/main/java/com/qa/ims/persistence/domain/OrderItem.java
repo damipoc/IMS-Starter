@@ -1,22 +1,19 @@
 package com.qa.ims.persistence.domain;
 
-public class Order {
+public class OrderItem {
 
     private Long id;
-    private String date;
-    private Long customerId;
+    private Long orderId;
     private Long itemId;
-
-    public Order(String date, Long customerId, Long itemId) {
-        this.date = date;
-        this.customerId = customerId;
+    
+    public OrderItem(Long orderId, Long itemId) {
+        this.orderId = orderId;
         this.itemId = itemId;
     }
 
-    public Order(Long id, String date, Long customerId, Long itemId) {
+    public OrderItem(Long id, Long orderId, Long itemId) {
         this.id = id;
-        this.date = date;
-        this.customerId = customerId;
+        this.orderId = orderId;
         this.itemId = itemId;
     }
 
@@ -28,20 +25,12 @@ public class Order {
         this.id = id;
     }
 
-    public String getDate() {
-        return date;
+    public Long getOrderId() {
+        return orderId;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public Long getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
     }
 
     public Long getItemId() {
@@ -54,17 +43,16 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order id: " + id + ", date: " + date + ", Customer ID: " + customerId + ", Item Id: " + itemId;
+        return "OrderItem id: " + id + ", itemId: " + itemId + ", orderId: " + orderId;
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((customerId == null) ? 0 : customerId.hashCode());
-        result = prime * result + ((date == null) ? 0 : date.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((itemId == null) ? 0 : itemId.hashCode());
+        result = prime * result + ((orderId == null) ? 0 : orderId.hashCode());
         return result;
     }
 
@@ -76,17 +64,7 @@ public class Order {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Order other = (Order) obj;
-        if (customerId == null) {
-            if (other.customerId != null)
-                return false;
-        } else if (!customerId.equals(other.customerId))
-            return false;
-        if (date == null) {
-            if (other.date != null)
-                return false;
-        } else if (!date.equals(other.date))
-            return false;
+        OrderItem other = (OrderItem) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -97,7 +75,14 @@ public class Order {
                 return false;
         } else if (!itemId.equals(other.itemId))
             return false;
+        if (orderId == null) {
+            if (other.orderId != null)
+                return false;
+        } else if (!orderId.equals(other.orderId))
+            return false;
         return true;
     }
 
+    
+    
 }
