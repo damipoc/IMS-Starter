@@ -69,10 +69,9 @@ public class OrderDAO implements Dao<Order> {
     public Order create(Order t) {
         try (Connection connection = DBUtils.getInstance().getConnection();
                 PreparedStatement statement = connection.prepareStatement(
-                        "INSERT INTO orders(order_date, fk_customer_id, fk_item_id) VALUES (?, ?, ?)");) {
+                        "INSERT INTO orders(order_date, fk_customer_id) VALUES (?, ?)");) {
             statement.setString(1, t.getDate());
             statement.setLong(2, t.getCustomerId());
-            statement.setLong(3, t.getItemId());
             statement.executeUpdate();
             return readLatest();
         } catch (Exception e) {
@@ -87,10 +86,9 @@ public class OrderDAO implements Dao<Order> {
         try (Connection connection = DBUtils.getInstance().getConnection();
                 PreparedStatement statement = connection
                         .prepareStatement(
-                                "UPDATE orders SET order_date = ?, fk_customer_id = ?, fk_item_id = ? WHERE id = ?");) {
+                                "UPDATE orders SET order_date = ?, fk_customer_id = ? WHERE id = ?");) {
             statement.setString(1, t.getDate());
             statement.setLong(2, t.getCustomerId());
-            statement.setLong(3, t.getItemId());
             statement.setLong(4, t.getId());
             statement.executeUpdate();
             return read(t.getId());
@@ -119,8 +117,7 @@ public class OrderDAO implements Dao<Order> {
         Long id = resultSet.getLong("id");
         String date = resultSet.getString("order_date");
         Long customerId = resultSet.getLong("fk_customer_id");
-        Long itemId = resultSet.getLong("fk_item_id");
-        return new Order(id, date, customerId, itemId);
+        return new Order(id, date, customerId);
     }
 
 }

@@ -27,17 +27,23 @@ public class OrderItemController implements CrudController<OrderItem> {
         for (OrderItem orderItem : orderItems) {
             LOGGER.info(orderItem);
         }
+        LOGGER.info("Would you like to calculate the total cost? Y/N");
+        String calc = utils.getString();
+        if (calc.equalsIgnoreCase("Y")) {
+            calculate();
+        }
         return orderItems;
     }
 
     @Override
     public OrderItem create() {
-        LOGGER.info("Please enter order id");
+
+        LOGGER.info("To which order ID would you like to add items?");
         Long orderId = utils.getLong();
         LOGGER.info("Please enter item id");
         Long itemId = utils.getLong();
         OrderItem orderItem = orderItemDAO.create(new OrderItem(orderId, itemId));
-        LOGGER.info("OrderItem created");
+        LOGGER.info("Item added");
         return orderItem;
     }
 
@@ -56,9 +62,23 @@ public class OrderItemController implements CrudController<OrderItem> {
 
     @Override
     public int delete() {
-		LOGGER.info("Please enter the id of the orderItem you would like to delete");
-		Long id = utils.getLong();
-		return orderItemDAO.delete(id);
+		LOGGER.info("Please enter the id of your order");
+		Long orderId = utils.getLong();
+        LOGGER.info("Please enter the id of the item you would like to remove");
+        Long itemId = utils.getLong();
+		return orderItemDAO.deleteItem(orderId, itemId);
+    }
+
+    public double calculate() {
+
+        LOGGER.info("Which order ID would you like to calculate?");
+        Long orderId = utils.getLong();
+
+        double value = orderItemDAO.calculate(orderId);
+        LOGGER.info(value);
+        
+
+        return value;
     }
 
 }
