@@ -120,4 +120,26 @@ public class OrderItemDAO implements Dao<OrderItem> {
         return new OrderItem(id, orderId, itemId);
     }
 
+    public double calculate(Long orderId) {
+        Double sumValue = 0.00;
+
+        try (Connection connection = DBUtils.getInstance().getConnection();
+                PreparedStatement statement = connection.prepareStatement(
+                        "SELECT SUM(i.value) FROM items i INNER JOIN orderItems oi ON oi.fk_item_id = i.id INNER JOIN orders o ON o.id = oi.fk_order_id WHERE oi.fk_order_id = ?");) {
+            statement.setLong(1, orderId);
+            try (ResultSet resultSet = statement.executeQuery();) {
+
+                while(resultSet.next()){
+                    sumValue = resultSet.getDouble("SUM(i.value)");
+                }
+                return sumValue;
+            }
+        } catch (Exception e) {
+            LOGGER.debug(e);
+            LOGGER.error(e.getMessage());
+
+        }
+        return sumValue;
+    }
+
 }

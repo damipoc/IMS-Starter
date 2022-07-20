@@ -53,6 +53,7 @@ public class IMS {
 			domainAction(domain);
 
 		} while (domain != Domain.STOP);
+
 	}
 
 	private void domainAction(Domain domain) {

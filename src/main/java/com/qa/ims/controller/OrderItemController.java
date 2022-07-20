@@ -27,6 +27,11 @@ public class OrderItemController implements CrudController<OrderItem> {
         for (OrderItem orderItem : orderItems) {
             LOGGER.info(orderItem);
         }
+        LOGGER.info("Would you like to calculate the total cost? Y/N");
+        String calc = utils.getString();
+        if (calc.equalsIgnoreCase("Y")) {
+            calculate();
+        }
         return orderItems;
     }
 
@@ -60,6 +65,18 @@ public class OrderItemController implements CrudController<OrderItem> {
 		LOGGER.info("Please enter the id of the orderItem you would like to delete");
 		Long id = utils.getLong();
 		return orderItemDAO.delete(id);
+    }
+
+    public double calculate() {
+
+        LOGGER.info("Which order ID would you like to calculate?");
+        Long orderId = utils.getLong();
+
+        double value = orderItemDAO.calculate(orderId);
+        LOGGER.info(value);
+        
+
+        return value;
     }
 
 }
