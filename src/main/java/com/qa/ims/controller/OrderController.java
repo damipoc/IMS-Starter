@@ -8,7 +8,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.qa.ims.persistence.dao.OrderDAO;
+import com.qa.ims.persistence.dao.OrderItemDAO;
 import com.qa.ims.persistence.domain.Order;
+import com.qa.ims.persistence.domain.OrderItem;
 import com.qa.ims.utils.Utils;
 
 public class OrderController implements CrudController<Order> {
@@ -16,10 +18,12 @@ public class OrderController implements CrudController<Order> {
     public static final Logger LOGGER = LogManager.getLogger();
 
     private OrderDAO orderDAO;
+    private OrderItemDAO orderItemDAO;
     private Utils utils;
 
-    public OrderController(OrderDAO orderDAO, Utils utils) {
+    public OrderController(OrderDAO orderDAO, OrderItemDAO orderItemDAO, Utils utils) {
         this.orderDAO = orderDAO;
+        this.orderItemDAO = orderItemDAO;
         this.utils = utils;
     }
 
@@ -41,7 +45,8 @@ public class OrderController implements CrudController<Order> {
         Long customerID = utils.getLong();
         LOGGER.info("Please enter an item ID to insert in the order");
         Long itemID = utils.getLong();
-        Order order = orderDAO.create(new Order(orderDate, customerID, itemID));
+        Order order = orderDAO.create(new Order(orderDate, customerID));
+        orderItemDAO.create(new OrderItem(order.getId(), itemID));
         LOGGER.info("Order created");
         return order;
     }

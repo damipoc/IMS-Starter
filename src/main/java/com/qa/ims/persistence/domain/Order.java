@@ -5,19 +5,16 @@ public class Order {
     private Long id;
     private String date;
     private Long customerId;
-    private Long itemId;
 
-    public Order(String date, Long customerId, Long itemId) {
+    public Order(String date, Long customerId) {
         this.date = date;
         this.customerId = customerId;
-        this.itemId = itemId;
     }
 
-    public Order(Long id, String date, Long customerId, Long itemId) {
+    public Order(Long id, String date, Long customerId) {
         this.id = id;
         this.date = date;
         this.customerId = customerId;
-        this.itemId = itemId;
     }
 
     public Long getId() {
@@ -44,17 +41,9 @@ public class Order {
         this.customerId = customerId;
     }
 
-    public Long getItemId() {
-        return itemId;
-    }
-
-    public void setItemId(Long itemId) {
-        this.itemId = itemId;
-    }
-
     @Override
     public String toString() {
-        return "Order id: " + id + ", date: " + date + ", Customer ID: " + customerId + ", Item Id: " + itemId;
+        return "Order id: " + id + ", date: " + date + ", Customer ID: " + customerId;
     }
 
     @Override
@@ -64,7 +53,6 @@ public class Order {
         result = prime * result + ((customerId == null) ? 0 : customerId.hashCode());
         result = prime * result + ((date == null) ? 0 : date.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((itemId == null) ? 0 : itemId.hashCode());
         return result;
     }
 
@@ -91,11 +79,6 @@ public class Order {
             if (other.id != null)
                 return false;
         } else if (!id.equals(other.id))
-            return false;
-        if (itemId == null) {
-            if (other.itemId != null)
-                return false;
-        } else if (!itemId.equals(other.itemId))
             return false;
         return true;
     }

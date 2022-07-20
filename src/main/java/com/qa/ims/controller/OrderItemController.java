@@ -32,12 +32,13 @@ public class OrderItemController implements CrudController<OrderItem> {
 
     @Override
     public OrderItem create() {
-        LOGGER.info("Please enter order id");
+
+        LOGGER.info("To which order ID would you like to add items?");
         Long orderId = utils.getLong();
         LOGGER.info("Please enter item id");
         Long itemId = utils.getLong();
         OrderItem orderItem = orderItemDAO.create(new OrderItem(orderId, itemId));
-        LOGGER.info("OrderItem created");
+        LOGGER.info("Item added");
         return orderItem;
     }
 
