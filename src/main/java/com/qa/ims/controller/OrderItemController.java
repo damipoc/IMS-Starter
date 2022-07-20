@@ -1,5 +1,6 @@
 package com.qa.ims.controller;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -38,45 +39,46 @@ public class OrderItemController implements CrudController<OrderItem> {
     @Override
     public OrderItem create() {
 
-        LOGGER.info("To which order ID would you like to add items?");
+        LOGGER.info("In which order ID would you like to add items?");
         Long orderId = utils.getLong();
-        LOGGER.info("Please enter item id");
+        LOGGER.info("Please enter item ID you would like to add.");
         Long itemId = utils.getLong();
         OrderItem orderItem = orderItemDAO.create(new OrderItem(orderId, itemId));
-        LOGGER.info("Item added");
+        LOGGER.info("Item added to the order.");
         return orderItem;
     }
 
     @Override
     public OrderItem update() {
-		LOGGER.info("Please enter the id of the orderItem you would like to update");
-		Long id = utils.getLong();
-		LOGGER.info("Please enter order ID");
-		Long orderId = utils.getLong();
-		LOGGER.info("Please enter item ID");
-		Long itemId = utils.getLong();
-		OrderItem orderItem = orderItemDAO.update(new OrderItem(id, orderId, itemId));
-		LOGGER.info("OrderItem Updated");
-		return orderItem;
+        LOGGER.info("Please enter the ID of the OrderItem you would like to update.");
+        Long id = utils.getLong();
+        LOGGER.info("Please enter an order ID.");
+        Long orderId = utils.getLong();
+        LOGGER.info("Please enter an item ID.");
+        Long itemId = utils.getLong();
+        OrderItem orderItem = orderItemDAO.update(new OrderItem(id, orderId, itemId));
+        LOGGER.info("OrderItem Updated.");
+        return orderItem;
     }
 
     @Override
     public int delete() {
-		LOGGER.info("Please enter the id of your order");
-		Long orderId = utils.getLong();
-        LOGGER.info("Please enter the id of the item you would like to remove");
+        LOGGER.info("Please enter the ID of your order.");
+        Long orderId = utils.getLong();
+        LOGGER.info("Please enter the ID of the item you would like to remove.");
         Long itemId = utils.getLong();
-		return orderItemDAO.deleteItem(orderId, itemId);
+        return orderItemDAO.deleteItem(orderId, itemId);
     }
 
     public double calculate() {
 
-        LOGGER.info("Which order ID would you like to calculate?");
+        DecimalFormat df = new DecimalFormat("0.00");
+        
+        LOGGER.info("Please enter the order ID that you would like to calculate.");
         Long orderId = utils.getLong();
 
         double value = orderItemDAO.calculate(orderId);
-        LOGGER.info(value);
-        
+        LOGGER.info(df.format(value) + " Pounds\n");
 
         return value;
     }

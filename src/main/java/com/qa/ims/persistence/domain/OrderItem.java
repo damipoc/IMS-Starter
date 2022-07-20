@@ -5,7 +5,7 @@ public class OrderItem {
     private Long id;
     private Long orderId;
     private Long itemId;
-    
+
     public OrderItem(Long orderId, Long itemId) {
         this.orderId = orderId;
         this.itemId = itemId;
@@ -43,7 +43,7 @@ public class OrderItem {
 
     @Override
     public String toString() {
-        return "OrderItem id: " + id + ", itemId: " + itemId + ", orderId: " + orderId;
+        return "\nOrderItem ID: " + id + "\nItem ID: " + itemId + "\nOrder ID: " + orderId + "\n";
     }
 
     @Override
@@ -82,7 +82,5 @@ public class OrderItem {
             return false;
         return true;
     }
-    
-
 
 }
