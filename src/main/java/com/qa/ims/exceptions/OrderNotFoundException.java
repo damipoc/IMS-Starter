@@ -1,6 +1,6 @@
 package com.qa.ims.exceptions;
 
-public class OrderNotFoundException {
+public class OrderNotFoundException extends RuntimeException{
 
     /**
      * 

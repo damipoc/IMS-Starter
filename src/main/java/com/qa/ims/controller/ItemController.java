@@ -1,3 +1,8 @@
+/*
+ * @author
+ * Damian Poclitar
+ */
+
 package com.qa.ims.controller;
 
 import java.util.List;
@@ -8,6 +13,12 @@ import org.apache.logging.log4j.Logger;
 import com.qa.ims.persistence.dao.ItemDAO;
 import com.qa.ims.persistence.domain.Item;
 import com.qa.ims.utils.Utils;
+
+/*
+ * 
+ * Takes in item details for CRUD functionality
+ * 
+ */
 
 public class ItemController implements CrudController<Item> {
 
@@ -21,6 +32,12 @@ public class ItemController implements CrudController<Item> {
         this.utils = utils;
     }
 
+    
+    /** 
+     * 
+     * Reads all the items to the logger
+     * @return List<Item>
+     */
     @Override
     public List<Item> readAll() {
         List<Item> items = itemDAO.readAll();
@@ -30,6 +47,12 @@ public class ItemController implements CrudController<Item> {
         return items;
     }
 
+    
+    /** 
+     * 
+     * Creates an item by taking user input
+     * @return Item
+     */
     @Override
     public Item create() {
         LOGGER.info("Please enter an item name");
@@ -41,6 +64,12 @@ public class ItemController implements CrudController<Item> {
         return item;
     }
 
+    
+    /** 
+     * 
+     * Updates an existing item by taking in user input
+     * @return Item
+     */
     @Override
     public Item update() {
         LOGGER.info("Please enter the id of the item you would like to update");
@@ -54,6 +83,11 @@ public class ItemController implements CrudController<Item> {
         return item;
     }
 
+    
+    /** 
+     * Deletes an existing item by the ID of the item
+     * @return int
+     */
     @Override
     public int delete() {
         LOGGER.info("Please enter the id of the item you would like to delete");

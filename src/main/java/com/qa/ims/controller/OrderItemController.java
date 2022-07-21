@@ -1,3 +1,8 @@
+/*
+ * @author
+ * Damian Poclitar
+ */
+
 package com.qa.ims.controller;
 
 import java.text.DecimalFormat;
@@ -9,6 +14,10 @@ import org.apache.logging.log4j.Logger;
 import com.qa.ims.persistence.dao.OrderItemDAO;
 import com.qa.ims.persistence.domain.OrderItem;
 import com.qa.ims.utils.Utils;
+
+/*
+ * Takes in the orderItem details for CRUD functionality
+ */
 
 public class OrderItemController implements CrudController<OrderItem> {
 
@@ -22,6 +31,11 @@ public class OrderItemController implements CrudController<OrderItem> {
         this.utils = utils;
     }
 
+    
+    /** 
+     * Reads all the orderItems to the logger
+     * @return List<OrderItem>
+     */
     @Override
     public List<OrderItem> readAll() {
         List<OrderItem> orderItems = orderItemDAO.readAll();
@@ -36,6 +50,11 @@ public class OrderItemController implements CrudController<OrderItem> {
         return orderItems;
     }
 
+    
+    /** 
+     * Asks for order ID and item ID to create more middleman data in OrderItem
+     * @return OrderItem
+     */
     @Override
     public OrderItem create() {
 
@@ -48,6 +67,11 @@ public class OrderItemController implements CrudController<OrderItem> {
         return orderItem;
     }
 
+    
+    /** 
+     * Updates an existing ItemOrder by taking in user input
+     * @return OrderItem
+     */
     @Override
     public OrderItem update() {
         LOGGER.info("Please enter the ID of the OrderItem you would like to update.");
@@ -61,6 +85,11 @@ public class OrderItemController implements CrudController<OrderItem> {
         return orderItem;
     }
 
+    
+    /** 
+     * Deletes an orderItem by taking in the order and item ID
+     * @return int
+     */
     @Override
     public int delete() {
         LOGGER.info("Please enter the ID of your order.");
@@ -70,6 +99,11 @@ public class OrderItemController implements CrudController<OrderItem> {
         return orderItemDAO.deleteItem(orderId, itemId);
     }
 
+    
+    /** 
+     * Uses the itemID in order to calculate the total value in 2 decimal format
+     * @return double
+     */
     public double calculate() {
 
         DecimalFormat df = new DecimalFormat("0.00");

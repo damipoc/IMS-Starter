@@ -1,3 +1,8 @@
+/*
+ * @author
+ * Damian Poclitar
+ */
+
 package com.qa.ims.controller;
 
 import java.util.List;
@@ -13,6 +18,10 @@ import com.qa.ims.persistence.domain.Order;
 import com.qa.ims.persistence.domain.OrderItem;
 import com.qa.ims.utils.Utils;
 
+/*
+ * Takes in order details for crud functionality
+ */
+
 public class OrderController implements CrudController<Order> {
 
     public static final Logger LOGGER = LogManager.getLogger();
@@ -27,6 +36,12 @@ public class OrderController implements CrudController<Order> {
         this.utils = utils;
     }
 
+    
+    /** 
+     * 
+     * Reads all the orders to the logger
+     * @return List<Order>
+     */
     @Override
     public List<Order> readAll() {
         List<Order> orders = orderDAO.readAll();
@@ -36,6 +51,12 @@ public class OrderController implements CrudController<Order> {
         return orders;
     }
 
+    
+    /** 
+     * 
+     * Creates an order and an orderitem by taking in user input
+     * @return Order
+     */
     @Override
     public Order create() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
@@ -51,6 +72,11 @@ public class OrderController implements CrudController<Order> {
         return order;
     }
 
+    
+    /** 
+     * Not allowed to update the order
+     * @return Order
+     */
     @Override
     public Order update() {
         LOGGER.info("You can not update orders, to add more items please use the Order Item menu.");
@@ -58,6 +84,12 @@ public class OrderController implements CrudController<Order> {
         return order;
     }
 
+    
+    /** 
+     * 
+     * Deletes an existing order by taking the ID of the order
+     * @return int
+     */
     @Override
     public int delete() {
         LOGGER.info("Please enter the ID of the order you would like to delete.");

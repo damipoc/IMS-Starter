@@ -1,3 +1,7 @@
+/*
+ * @author
+ * Damian Poclitar
+ */
 package com.qa.ims.persistence.dao;
 
 import java.sql.Connection;
@@ -18,6 +22,12 @@ public class OrderDAO implements Dao<Order> {
 
     public static final Logger LOGGER = LogManager.getLogger();
 
+    
+    /** 
+     * Reads all orders from the database
+     * 
+     * @return List<Order>
+     */
     @Override
     public List<Order> readAll() {
         try (Connection connection = DBUtils.getInstance().getConnection();
@@ -65,6 +75,13 @@ public class OrderDAO implements Dao<Order> {
         return null;
     }
 
+    
+    /** 
+     * Creates an order in the database
+     * 
+     * @param t Order object
+     * @return Order
+     */
     @Override
     public Order create(Order t) {
         System.out.println("Creating");
@@ -82,6 +99,13 @@ public class OrderDAO implements Dao<Order> {
         return null;
     }
 
+    
+    /** 
+     * Updates an order in the database
+     * 
+     * @param t Takes in an order object to update orders in the database
+     * @return Order
+     */
     @Override
     public Order update(Order t) {
         try (Connection connection = DBUtils.getInstance().getConnection();
@@ -100,6 +124,13 @@ public class OrderDAO implements Dao<Order> {
         return null;
     }
 
+    
+    /** 
+     * Deletes an order in the database
+     * 
+     * @param id of the order that needs to be deleted
+     * @return int
+     */
     @Override
     public int delete(long id) {
         try (Connection connection = DBUtils.getInstance().getConnection();

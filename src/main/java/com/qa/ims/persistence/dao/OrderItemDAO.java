@@ -1,3 +1,8 @@
+/*
+ * @author
+ * Damian Poclitar
+ */
+
 package com.qa.ims.persistence.dao;
 
 import java.sql.Connection;
@@ -18,6 +23,12 @@ public class OrderItemDAO implements Dao<OrderItem> {
 
     public static final Logger LOGGER = LogManager.getLogger();
 
+    
+    /** 
+     * Reads all the OrderItems from the database
+     * 
+     * @return List<OrderItem>
+     */
     @Override
     public List<OrderItem> readAll() {
         try (Connection connection = DBUtils.getInstance().getConnection();
@@ -65,6 +76,13 @@ public class OrderItemDAO implements Dao<OrderItem> {
         return null;
     }
 
+    
+    /** 
+     * Creates an OrderItem in the database
+     * 
+     * @param t Object of OrderItem, ID will be ignored
+     * @return OrderItem
+     */
     @Override
     public OrderItem create(OrderItem t) {
         try (Connection connection = DBUtils.getInstance().getConnection();
@@ -81,6 +99,13 @@ public class OrderItemDAO implements Dao<OrderItem> {
         return null;
     }
 
+    
+    /** 
+     * Updates an order item in the database
+     * 
+     * @param t Takes in an OrderItem object and the ID is used to update the orderItem in the database
+     * @return OrderItem
+     */
     @Override
     public OrderItem update(OrderItem t) {
         try (Connection connection = DBUtils.getInstance().getConnection();
@@ -120,6 +145,13 @@ public class OrderItemDAO implements Dao<OrderItem> {
         return new OrderItem(id, orderId, itemId);
     }
 
+    
+    /** 
+     * Takes in the OrderID and then uses all the itemIDs in OrderItem to sum the total value in 2 decimal form.
+     * 
+     * @param orderId 
+     * @return double
+     */
     public double calculate(Long orderId) {
         Double sumValue = 0.00;
 
@@ -142,6 +174,14 @@ public class OrderItemDAO implements Dao<OrderItem> {
         return sumValue;
     }
 
+    
+    /** 
+     * Takes in the Order ID and Item ID of the orderItem that needs to be deleted
+     * 
+     * @param orderId
+     * @param itemId
+     * @return int
+     */
     public int deleteItem(Long orderId, Long itemId) {
 
         try (Connection connection = DBUtils.getInstance().getConnection();
