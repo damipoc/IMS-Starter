@@ -67,7 +67,6 @@ public class ItemDAO implements Dao<Item> {
 
     @Override
     public Item create(Item t) {
-        System.out.println("Test");
         try (Connection connection = DBUtils.getInstance().getConnection();
                 PreparedStatement statement = connection
                         .prepareStatement("INSERT INTO items(name, value) VALUES (?, ?)");) {
