@@ -67,6 +67,7 @@ public class OrderDAO implements Dao<Order> {
 
     @Override
     public Order create(Order t) {
+        System.out.println("Creating");
         try (Connection connection = DBUtils.getInstance().getConnection();
                 PreparedStatement statement = connection.prepareStatement(
                         "INSERT INTO orders(order_date, fk_customer_id) VALUES (?, ?)");) {
@@ -89,7 +90,7 @@ public class OrderDAO implements Dao<Order> {
                                 "UPDATE orders SET order_date = ?, fk_customer_id = ? WHERE id = ?");) {
             statement.setString(1, t.getDate());
             statement.setLong(2, t.getCustomerId());
-            statement.setLong(4, t.getId());
+            statement.setLong(3, t.getId());
             statement.executeUpdate();
             return read(t.getId());
         } catch (Exception e) {

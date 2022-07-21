@@ -20,7 +20,7 @@ import com.qa.ims.utils.Utils;
 @RunWith(MockitoJUnitRunner.class)
 public class ItemControllerTest {
 
-    @Mock
+	@Mock
 	private Utils utils;
 
 	@Mock
@@ -32,17 +32,17 @@ public class ItemControllerTest {
 	@Test
 	public void testCreate() {
 		final String NAME = "drink";
-        final Double VALUE = 1.50;
+		final Double VALUE = 1.50;
 		final Item created = new Item(NAME, VALUE);
 
 		Mockito.when(utils.getString()).thenReturn(NAME);
-        Mockito.when(utils.getDouble()).thenReturn(VALUE);
+		Mockito.when(utils.getDouble()).thenReturn(VALUE);
 		Mockito.when(dao.create(created)).thenReturn(created);
 
 		assertEquals(created, controller.create());
 
 		Mockito.verify(utils, Mockito.times(1)).getString();
-        Mockito.verify(utils, Mockito.times(1)).getDouble();
+		Mockito.verify(utils, Mockito.times(1)).getDouble();
 		Mockito.verify(dao, Mockito.times(1)).create(created);
 	}
 
@@ -64,14 +64,14 @@ public class ItemControllerTest {
 
 		Mockito.when(this.utils.getLong()).thenReturn(1L);
 		Mockito.when(this.utils.getString()).thenReturn(updated.getName());
-        Mockito.when(this.utils.getDouble()).thenReturn(updated.getValue());
+		Mockito.when(this.utils.getDouble()).thenReturn(updated.getValue());
 		Mockito.when(this.dao.update(updated)).thenReturn(updated);
 
 		assertEquals(updated, this.controller.update());
 
 		Mockito.verify(this.utils, Mockito.times(1)).getLong();
 		Mockito.verify(this.utils, Mockito.times(1)).getString();
-        Mockito.verify(this.utils, Mockito.times(1)).getDouble();
+		Mockito.verify(this.utils, Mockito.times(1)).getDouble();
 		Mockito.verify(this.dao, Mockito.times(1)).update(updated);
 	}
 
@@ -88,5 +88,4 @@ public class ItemControllerTest {
 		Mockito.verify(dao, Mockito.times(1)).delete(ID);
 	}
 
-    
 }
