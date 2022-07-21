@@ -8,12 +8,12 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.qa.ims.persistence.domain.Item;
+import com.qa.ims.persistence.domain.OrderItem;
 import com.qa.ims.utils.DBUtils;
 
-public class ItemDAOTest {
+public class OrderItemDAOTest {
 
-    private final ItemDAO DAO = new ItemDAO();
+    private final OrderItemDAO DAO = new OrderItemDAO();
 
     @Before
     public void setup() {
@@ -23,39 +23,39 @@ public class ItemDAOTest {
 
     @Test
     public void testCreate() {
-        final Item created = new Item(2L, "Snack", 1.99);
+        final OrderItem created = new OrderItem(2L, 1L, 1L);
         assertEquals(created, DAO.create(created));
     }
 
     @Test
     public void testReadAll() {
-        List<Item> expected = new ArrayList<>();
-        expected.add(new Item(1L, "Drink", 1.50));
+        List<OrderItem> expected = new ArrayList<>();
+        expected.add(new OrderItem(1L, 1L, 1L));
         assertEquals(expected, DAO.readAll());
 
     }
 
     @Test
     public void testReadLatest() {
-        assertEquals(new Item(1L, "Drink", 1.50), DAO.readLatest());
+        assertEquals(new OrderItem(1L, 1L, 1L), DAO.readLatest());
     }
 
     @Test
     public void testRead() {
         final long ID = 1L;
-        assertEquals(new Item(ID, "Drink", 1.50), DAO.read(ID));
+        assertEquals(new OrderItem(ID, 1L, 1L), DAO.read(ID));
     }
 
     @Test
     public void testUpdate() {
-        final Item updated = new Item(1L, "Drink", 1.50);
+        final OrderItem updated = new OrderItem(1L, 1L, 1L);
         assertEquals(updated, DAO.update(updated));
 
     }
 
     @Test
     public void testDelete() {
-        assertEquals(0, DAO.delete(1));
+        assertEquals(1, DAO.delete(1));
     }
-
+    
 }
