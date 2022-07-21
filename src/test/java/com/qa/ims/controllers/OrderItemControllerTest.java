@@ -84,4 +84,18 @@ public class OrderItemControllerTest {
 		Mockito.verify(dao, Mockito.times(1)).deleteItem(ID, 1L);
 	}
 
+	@Test
+	public void testCalculate() {
+
+		final double DELTA = 1e-15;
+
+		Mockito.when(utils.getLong()).thenReturn(1L);
+
+		assertEquals(0.00, this.controller.calculate(), DELTA);
+
+		Mockito.verify(utils, Mockito.times(1)).getLong();
+
+
+	}
+
 }
