@@ -1,3 +1,8 @@
+/*
+ * @author
+ * Damian Poclitar
+ */
+
 package com.qa.ims.persistence.dao;
 
 import java.sql.Connection;
@@ -18,6 +23,12 @@ public class ItemDAO implements Dao<Item> {
 
     public static final Logger LOGGER = LogManager.getLogger();
 
+    
+    /** 
+     * Read all items from the database
+     * 
+     * @return List<Item> A list of items
+     */
     @Override
     public List<Item> readAll() {
         try (Connection connection = DBUtils.getInstance().getConnection();
@@ -48,6 +59,11 @@ public class ItemDAO implements Dao<Item> {
         return null;
     }
 
+    
+    /** 
+     * @param id Shows the item with the given ID
+     * @return Item that was found with the given ID
+     */
     @Override
     public Item read(Long id) {
         try (Connection connection = DBUtils.getInstance().getConnection();
@@ -65,6 +81,12 @@ public class ItemDAO implements Dao<Item> {
         return null;
     }
 
+    
+    /** 
+     * @param t Create an item in the database, ID will be ignored
+     * 
+     * @return Item
+     */
     @Override
     public Item create(Item t) {
         try (Connection connection = DBUtils.getInstance().getConnection();
@@ -81,6 +103,13 @@ public class ItemDAO implements Dao<Item> {
         return null;
     }
 
+    
+    /** 
+     * Updates an item in the database
+     * 
+     * @param t Takes in an item object, the ID field will be used to update that item in the database
+     * @return Item
+     */
     @Override
     public Item update(Item t) {
         try (Connection connection = DBUtils.getInstance().getConnection();
@@ -98,6 +127,13 @@ public class ItemDAO implements Dao<Item> {
         return null;
     }
 
+    
+    /** 
+     * Deletes a item in the database based on the ID given
+     * 
+     * @param id of the item that needs to be deleted
+     * @return int
+     */
     @Override
     public int delete(long id) {
         try (Connection connection = DBUtils.getInstance().getConnection();
